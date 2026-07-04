@@ -25,3 +25,44 @@ app.get("/users/:id", (req, res) => {
 
 });
 
+
+// Gate Question
+//exo2
+
+// const express = require("express");
+// const app = express();
+
+// Middleware
+function requestLogger(req, res, next) {
+    const start = Date.now();
+
+    res.on("finish", () => {
+        const duration = Date.now() - start;
+
+        const time = new Date().toISOString();
+
+        console.log(`[${time}] ${req.method} ${req.url} - ${duration}ms`);
+    });
+
+    next();
+}
+
+// use middleware for ALL routes
+app.use(requestLogger);
+
+app.use(express.json());
+
+// Routes
+app.get("/", (req, res) => {
+    res.json({ message: "Home Page" });
+});
+
+app.get("/users", (req, res) => {
+    res.json([{ id: 1, name: "Florence" }]);
+});
+
+// start server
+app.listen(3000, () => {
+    console.log("Server running on port 3000");
+});
+
