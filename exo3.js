@@ -28,17 +28,13 @@ app.get("/todos", (req, res) => {
 });
 
 app.post("/todos", (req, res) => {
-
     const { task, status } = req.body;
-
     let newtask = {
         id: currentId++,
         task: task,
         status: status || "doing"
     };
-
     todos.push(newtask);
-
     res.json(newtask);
 });
 

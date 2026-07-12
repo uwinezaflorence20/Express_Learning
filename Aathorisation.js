@@ -6,6 +6,10 @@ app.use(express.json());
 
 const FILE = "./auth.json";
 
+app.get("/", (req, res) => {
+    res.send("This is the beginning of everything");
+});
+
 /**
  * Helper: read users from file
  */
