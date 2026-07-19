@@ -23,8 +23,11 @@ let rates = {
     gbp: 1000
 }
 
-app.post('/convert', (req, res) => {
-    let { amount, currency } = req.body;
+app.get("/",(req,res)=>{
+    res.send("This is the HomePage");
+})
+app.get('/convert', (req, res) => {
+    let { amount, currency } = req.query;
     if (!amount || !currency) {
         return res.status(400).json({ error: "amount and currency are required" });
     }
@@ -33,10 +36,10 @@ app.post('/convert', (req, res) => {
         return res.status(400).json({error: "The amount should be a numbers"});
     }
 
-    if(!value[currency]){
+    if(!rates[currency]){
         return res.status(400).json({error:"The currency should be usd,eur and gbp"});
     }
-    let convertedValue = value * value[currency];
+    let convertedValue = value * rates[currency];
 
     res.json({
         input:{

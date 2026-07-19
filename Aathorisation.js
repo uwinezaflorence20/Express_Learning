@@ -10,25 +10,16 @@ app.get("/", (req, res) => {
     res.send("This is the beginning of everything");
 });
 
-/**
- * Helper: read users from file
- */
 function getUsers() {
   if (!fs.existsSync(FILE)) return [];
   const data = fs.readFileSync(FILE, "utf-8");
   return data ? JSON.parse(data) : [];
 }
 
-/**
- * Helper: save users to file
- */
 function saveUsers(users) {
   fs.writeFileSync(FILE, JSON.stringify(users, null, 2));
 }
 
-/**
- * POST /signup
- */
 app.post("/signup", (req, res) => {
   const { username, password } = req.body;
 
@@ -48,10 +39,6 @@ app.post("/signup", (req, res) => {
 
   res.send("Signup successful!");
 });
-
-/**
- * POST /login
- */
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
 

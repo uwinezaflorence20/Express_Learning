@@ -17,7 +17,6 @@
 
 const express = require('express');
 const app = express();
-
 const start = Date.now();  
 // creating the middleware
 function requestLogger(req, res, next) {
